@@ -1,5 +1,11 @@
+# character_creation_module/main.py
+
 from random import randint
 
+# Новый импорт.
+# Из модуля start_game_banner, который расположен в папке graphic_arts,
+# импортируем функцию run_screensaver().
+from graphic_arts.start_game_banner import run_screensaver
 
 def attack(char_name: str, char_class: str) -> str:
     damage = {
@@ -86,19 +92,14 @@ def choice_char_class() -> str:
     return char_class
 
 
-def main():
+if __name__ == '__main__':
+    run_screensaver()
     print('Приветствую тебя, искатель приключений!')
     print('Прежде чем начать игру...')
     char_name: str = input('...назови себя: ')
-    print(f"""
-Здравствуй, {char_name}! Твоя выносливость — 80, атака — 5, защита — 10.
-Выберем тебе класс, чтобы начать игру.
-""")
+    print(f'Здравствуй, {char_name}! '
+          'Сейчас твоя выносливость — 80, атака — 5 и защита — 10.')
+    print('Ты можешь выбрать один из трёх путей силы:')
+    print('Воитель, Маг, Лекарь')
     char_class: str = choice_char_class()
-    start_training(char_name, char_class)
-    print('Храбрый воин, теперь ты готов идти в путь.')
-
-
-
-if __name__ == "__main__":
-    main()
+    print(start_training(char_name, char_class)) 
