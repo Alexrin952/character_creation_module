@@ -1,17 +1,18 @@
-# character_creation_module/main.py
-
 from random import randint
 
-# Новый импорт.
-# Из модуля start_game_banner, который расположен в папке graphic_arts,
-# импортируем функцию run_screensaver().
-from graphic_arts.start_game_banner import run_screensaver
 
 def attack(char_name: str, char_class: str) -> str:
+    """
+    Вычисляет урон, наносимый персонажем в зависимости от его класса.
+
+    :param char_name: Имя персонажа.
+    :param char_class: Класс персонажа.
+    :return: Сообщение с результатом атаки.
+    """
     damage = {
         'warrior': randint(3, 5),
         'mage': randint(5, 10),
-        'healer': randint(-3, -1)
+        'healer': randint(-3, -1),
     }
     message = f'{char_name} нанёс урон противнику '
     message += f'равный {5 + damage.get(char_class, 0)}'
@@ -19,24 +20,38 @@ def attack(char_name: str, char_class: str) -> str:
 
 
 def defence(char_name: str, char_class: str) -> str:
+    """
+    Вычисляет блокированный урон персонажем в зависимости от его класса.
+
+    :param char_name: Имя персонажа.
+    :param char_class: Класс персонажа.
+    :return: Сообщение с результатом блокирования урона.
+    """
     block = {
         'warrior': randint(5, 10),
         'mage': randint(-2, 2),
-        'healer': randint(2, 5)
+        'healer': randint(2, 5),
     }
     return f'{char_name} блокировал {10 + block.get(char_class, 0)} урона'
 
 
 def special(char_name: str, char_class: str) -> str:
+    """
+    Выполняет специальное действие персонажа в зависимости от его класса.
+
+    :param char_name: Имя персонажа.
+    :param char_class: Класс персонажа.
+    :return: Сообщение с результатом выполнения специального действия.
+    """
     specials = {
         'warrior': 'Выносливость',
         'mage': 'Атака',
-        'healer': 'Защита'
+        'healer': 'Защита',
     }
     values = {
         'warrior': 105,
         'mage': 45,
-        'healer': 40
+        'healer': 40,
     }
     message = f'{char_name} применил специальное умение '
     message += f'«{specials.get(char_class, "")} {values.get(char_class, 0)}»'
@@ -44,10 +59,17 @@ def special(char_name: str, char_class: str) -> str:
 
 
 def start_training(char_name: str, char_class: str) -> str:
+    """
+    Запускает тренировку персонажа, позволяя пользователю вводить команды.
+
+    :param char_name: Имя персонажа.
+    :param char_class: Класс персонажа.
+    :return: Сообщение об окончании тренировки.
+    """
     class_desc = {
         'warrior': 'Воитель — отличный боец ближнего боя.',
         'mage': 'Маг — превосходный укротитель стихий.',
-        'healer': 'Лекарь — чародей, способный исцелять раны.'
+        'healer': 'Лекарь — чародей, способный исцелять раны.',
     }
     print(f"""
 {char_name}, ты {class_desc.get(char_class, "Неизвестный класс")}
@@ -69,6 +91,11 @@ defence — чтобы блокировать атаку, special — чтобы
 
 
 def choice_char_class() -> str:
+    """
+    Позволяет пользователю выбрать класс персонажа.
+
+    :return: Выбранный пользователем класс персонажа.
+    """
     class_desc = {
         'warrior': ('Воитель — дерзкий воин ближнего боя. '
                     'Сильный, выносливый и отважный.'),
@@ -76,20 +103,21 @@ def choice_char_class() -> str:
                  'воин дальнего боя.'
                  'Обладает высоким интеллектом.'),
         'healer': ('Лекарь — могущественный заклинатель. '
-                   'Черпает силы из природы, веры и духов.')
+                   'Черпает силы из природы, веры и духов.'),
     }
     approve_choice: str = ''
     char_class: str = ''  # Инициализация пустой строкой
     while approve_choice != 'y':
         char_class = input(
-            'Выбери класс: Воитель — warrior, Маг — mage, Лекарь — healer: '
+            'Выбери класс: Воитель — warrior, Маг — mage, Лекарь — healer: ',
         )
         print(class_desc.get(char_class, 'Неизвестный класс'))
         approve_choice = input(
             'Нажми (Y), чтобы подтвердить выбор,\n'
-            'или любую другую кнопку, чтобы выбрать другого персонажа\n'
+            'или любую другую кнопку, чтобы выбрать другого персонажа\n',
         ).lower()
     return char_class
+
 
 
 if __name__ == '__main__':
